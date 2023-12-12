@@ -1,9 +1,7 @@
 from django.db import models
 import uuid
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 # from phone_field import PhoneField
-
 # Create your models here.
 
 class UserAccountBase(BaseUserManager):
@@ -29,7 +27,9 @@ class UserAccountBase(BaseUserManager):
 
 
 class UserAccount(AbstractBaseUser):
+    user_id =  models.UUIDField(editable=False, unique=True, primary_key=True, default=uuid.uuid4)
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
+    verified = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -46,21 +46,3 @@ class UserAccount(AbstractBaseUser):
     
     def has_module_perms(self, app_label):
         return True
-    
-
-class VerificationToken(models.Model):
-    email = models.EmailField()
-    otp = models.CharField(max_length=20)
-    time_generated = models.DateTimeField()
-
-    def __str__(self):
-        return f"{self.email}: {self.otp}"
-
-
-class PasswordVerificationToken(models.Model):
-    email = models.EmailField()
-    otp = models.CharField(max_length=20)
-    time_generated = models.DateTimeField()
-
-    def __str__(self):
-        return f"{self.email}: {self.otp}"

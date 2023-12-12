@@ -1,0 +1,172 @@
+body {
+    width: 70vw;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.body-content-container {
+    width: 100%;
+}
+
+.body-content-header {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 80%;
+    text-align: center;
+}
+
+.body-content-header h1 {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.div-content-container {
+    background-color: aquamarine;
+}
+
+.authorization-note-container {
+    margin-bottom: 50px;
+}
+
+.endpoint-link-box {
+    border: 1px solid blue;
+    border: 5px;
+    padding: 10px;
+}
+
+.endpoint-data-box {
+    border: 1px solid rgb(146, 184, 146);
+    border-radius: 10px;
+    background-color: rgb(225, 237, 240);
+    margin-bottom: 50px;
+}
+
+.endpoint-detail-container {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.response-container,
+.request-container {
+    background-color: rgb(166, 201, 207);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    padding-top: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 10px;
+}
+
+.auth-errors-box,
+.unsuccessful-response-container {
+    background-color: rgb(51, 51, 50);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    padding-top: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 10px;
+    color: white;
+}
+
+
+.indent {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.zero-padding {
+    margin: 0;
+}
+
+.leave-bottom-margin {
+    margin-bottom: 20px;
+}
+
+.endpoint-description {
+    margin-bottom: 30px;
+}
+
+.white-line {
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.get-btn {
+    background-color: blue;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    width: 120px;
+    color: white;
+    font-size: larger;
+    font-weight: 500;
+}
+
+.post-btn {
+    background-color: green;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 120px;
+    color: white;
+    font-size: larger;
+    font-weight: 500;
+}
+
+.put-btn {
+    background-color: yellow;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 120px;
+    color: white;
+    font-size: larger;
+    font-weight: 500;
+}
+
+.del-btn {
+    background-color: red;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 120px;
+    color: white;
+    font-size: larger;
+    font-weight: 500;
+}
+
+
+.auth-errors-group {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.auth-errors-box {
+    background-color: rgb(51, 51, 50);
+    padding-bottom: 20px;
+    padding-top: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 10px;
+    color: white;
+}
+
+.auth-data-box {
+    border: 1px solid rgb(146, 184, 146);
+    border-radius: 10px;
+    background-color: rgb(225, 237, 240);
+    margin-bottom: 50px;
+}
