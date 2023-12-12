@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core',
+    'rest_framework',
+    'rest_framework_simplejwt',
 ]
 
 SIMPLE_JWT = {
@@ -116,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+AUTH_USER_MODEL = 'core.UserAccount'
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -153,3 +156,4 @@ DEFAULT_FROM_EMAIL = (
     "InterviewPrep Incorporation <successbuilders360@gmail.com>"
 )
 SERVER_EMAIL = "successbuilders360@gmail.com"
+

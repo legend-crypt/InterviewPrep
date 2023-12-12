@@ -4,8 +4,19 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+<<<<<<< HEAD
+=======
+djangrestframework = "*"
+djangorestframework-simplejwt = "*"
+django-cors-headers = "*"
+pytz = "*"
+>>>>>>> fc2c71ce03d8ef053dc5f6a9635fc4871ef6cde5
 
 [dev-packages]
 
 [requires]
+<<<<<<< HEAD
 python_version = "3.10"
+=======
+python_version = "3.9"
+>>>>>>> fc2c71ce03d8ef053dc5f6a9635fc4871ef6cde5
