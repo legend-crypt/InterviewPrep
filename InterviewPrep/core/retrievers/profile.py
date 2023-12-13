@@ -1,5 +1,5 @@
-from core.model.accounts import UserAccount
-from core.model.profile import Profile
+from core.models.accounts import UserAccount
+from core.models.profile import Profile
 
 def get_profile_by_id(id) ->Profile:
     """Get profile by id

@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 bleach = "*"
 djangorestframework-simplejwt = "*"
+djangorestframework = "*"
 
 [dev-packages]
 
