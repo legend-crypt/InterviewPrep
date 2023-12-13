@@ -12,23 +12,23 @@ from rest_framework_simplejwt.views import (
 
 AUTHENTICATION_URLS = [
      path(
-        "api/account/password-reset-request/",
+        "authentication/password-reset-request/",
         PasswordViewset.as_view({"post": "password_reset_request"}),
     ),
     path(
-        "api/account/password-reset-verify/",
+        "authentication/password-reset-verify/",
         PasswordViewset.as_view({"post": "verify_password_reset_otp"}),
     ),
     path(
-        "api/account/password-reset/",
+        "authentication/password-reset/",
         PasswordViewset.as_view({"post": "password_reset"}),
     ),
      path(
-        "api/account/signin/",
+        "authentication/signin/",
         SignInView.as_view(),
     ),
     path(
-        "api/account/signout/",
+        "authentication/signout/",
         SignOutView.as_view({"post": "post"}),
     ),
     path("api/authentication/token/", TokenObtainPairView.as_view()),
