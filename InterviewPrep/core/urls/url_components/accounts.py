@@ -5,28 +5,28 @@ from core.views.accounts import (
 
 ACCOUNTS_URLS = [
     path(
-        "api/accounts/",
+        "accounts/",
         AccountViewset.as_view({"get": "list"}),
     ),
     path(
-        "api/accounts/create/",
+        "accounts/create/",
         AccountViewset.as_view({"post": "create_account"}),
     ),
     path(
-        "api/account/resend-code/",
+        "accounts/resend-code/",
         AccountViewset.as_view({"post": "send_verification_email"}),
     ),
     path(
-        "api/account/send-verification-email/",
+        "accounts/send-verification-code/",
         AccountViewset.as_view({"post": "send_verification_email"}),
     ),
     path(
-        "api/account/verify-email/",
+        "accounts/verify-email/",
         AccountViewset.as_view({"post": "verify_email"}),
         name="verify",
     ),
     path(
-        "api/account/retrieve/<str:user_id>/",
+        "accounts/retrieve/<str:user_id>/",
         AccountViewset.as_view({"get": "retrieve_user"}),
     ),
   
