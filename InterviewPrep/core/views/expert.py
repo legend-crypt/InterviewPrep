@@ -1,81 +1,85 @@
+from core.models.expert import Expert
 from rest_framework import viewsets, status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from core.senders.expert import create_expert
 from core.retrievers.expert import *
-from core.serializers.expert import ExpertSerializer
+from core.senders.expert import *
+from core.utils.general import *
 
-class ExpertViewSet(viewsets.ViewSet):
-    
-    def list(self, request) -> Response:
-        """List all experts
+class ExpertViewset(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
 
-        Args:
-            request (http): http request
+    def list(self,request):
+        context = get_experts()
+        return Response(context,status=status.HTTP_200_OK)
 
-        Returns:
-            Response: http response
+    def retrieve(self, request, id):
         """
-        experts = Expert.objects.all()
-        serializer = ExpertSerializer(experts, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    
-    def retrieve(self, request, pk=None) -> Response:
-        """Retrieve expert by id
-
-        Args:
-            request (http): http request
-            pk (uuid): uuid field
-
-        Returns:
-            Response: http response
+        Retrieve an expert object
         """
-        expert = get_expert_by_id(pk)
-        if expert:
-            serializer = ExpertSerializer(expert)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response({'message': 'Expert not found'}, status=status.HTTP_404_NOT_FOUND)
-    
-    
-    
-    def create(self, request) -> Response:
-        """Create Expert
-
-        Args:
-            request (http): http request
-
-        Returns:
-            Response: http response
-        """
-        email = request.data.get('email')
-        expert = get_expert_by_email(email)
-        if expert:
-            return Response({'message': 'Email already exists'}, status=status.HTTP_400_BAD_REQUEST)
-        if expert.verified:
-            return Response({'message': 'Email already verified'}, status=status.HTTP_208_ALREADY_REPORTED)
-        
-        data = request.data
-        expert = create_expert(data)
-        if expert:
-            return Response(expert, status=status.HTTP_201_CREATED)
-        return Response({'message': 'Invalid data'}, status=status.HTTP_400_BAD_REQUEST)
-    
-    
-    def update(request, pk=None) -> Response:
-        """Update Expert
-
-        Args:
-            request (http): http request
-            pk (uuid): uuid field
-
-        Returns:
-            Response: http response
-        """
-        expert = get_expert_by_id(pk)
+        expert = get_expert_by_id(id)
         if not expert:
-            return Response({'message': 'Expert not found'}, status=status.HTTP_404_NOT_FOUND)
+            context = {
+                "error": "Expert does not exist"
+            }
+            return Response(context, status=status.HTTP_404_NOT_FOUND)
+        context = {
+            "detail": "Expert retrieved successfully",
+            "expert": get_expert_information(expert)
+        }  
+        return Response(context, status=status.HTTP_200_OK)
         
-        data = request.data
-        expert = update_expert(expert, data)
-        if expert:
-            return Response(get_expert_information(expert), status=status.HTTP_200_OK)
-        return Response({'message': 'Invalid data'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    def create(self, request)->Response:
+        """Create expert
+
+        Args:
+            request (http): http request
+
+        Returns:
+            http Response: http response
+        """
+        user = get_user_from_jwttoken(request)
+        if user.expert:
+            context = {
+                "error": "Expert already exists"
+            }
+            return Response(context, status=status.HTTP_208_ALREADY_REPORTED)
+        expert = create_expert(request.data)
+        
+        user.expert = get_expert_by_id(expert['expert_id'])
+        user.save()
+        context = {
+            "detail": "Expert created successfully",
+            "expert": expert
+        }
+        
+        return Response(context, status=status.HTTP_201_CREATED)  
+        
+        
+    def update(self, request)->Response:
+        """Update expert
+
+        Args:
+            request (http): http request
+
+        Returns:
+            Response: http response
+        """
+        user = get_user_from_jwttoken(request)
+        if not user.expert:
+            context = {
+                "error": "Expert does not exist"
+            }
+            return Response(context, status=status.HTTP_404_NOT_FOUND)
+        expert = update_expert(request.data, user.expert)
+        if not expert:
+            context = {
+                "error": "Expert update failed"
+            }
+            return Response(context, status=status.HTTP_400_BAD_REQUEST)
+        context = { 
+            "detail": "Expert updated successfully",
+            "expert": expert
+        }
+        return Response(context, status=status.HTTP_200_OK)

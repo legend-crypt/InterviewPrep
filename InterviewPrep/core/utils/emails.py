@@ -26,7 +26,7 @@ def email_verification(email: str, otp_length: int):
     sender = SENDER
     receiver = [email]
     html_content = render_to_string(
-        "core/accounts/emailverification.html",
+        "core/accounts/email_verification.html",
         {"pin": pin, "receiver": email},
     )
     text_content = strip_tags(html_content)

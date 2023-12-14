@@ -1,6 +1,12 @@
 from core.models.expert import Expert
 from core.serializers.expert import ExpertSerializer
 
+
+def get_experts():
+    """Get all experts in the database"""
+    experts = Expert.objects.all()
+    return experts
+
 def get_expert_by_id(id):
     """get expert by email
 
@@ -26,7 +32,7 @@ def get_expert_by_email(email:str) -> Expert:
         Expert: object instance object
     """
     try:
-        return Expert.object.get(user__email=email)
+        return Expert.objects.get(user__email=email)
     except Expert.DoesNotExist:
         return None
     
