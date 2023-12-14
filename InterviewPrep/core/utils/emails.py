@@ -3,8 +3,7 @@ from datetime import datetime, timedelta
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-from core.models import UserAccount,VerificationToken,PasswordVerificationToken
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 from typing import List, Tuple, Dict
 from core.retrievers.accounts import *
 from core.retrievers.verification_token import *
@@ -12,10 +11,9 @@ from core.senders.verification_token import *
 from core.utils.general import generate_otp
 
 
-USERMODEL = get_user_model()
 UTC = pytz.UTC
 
-SENDER = "InterviewPrep Incorporation <successbuilders360@gmail.com>"
+SENDER = "InterviewPrep Incorporation <konadulordkweku@gmail.com>"
 
 def email_verification(email: str, otp_length: int):
     """
@@ -28,7 +26,7 @@ def email_verification(email: str, otp_length: int):
     sender = SENDER
     receiver = [email]
     html_content = render_to_string(
-        "core/verification_email.html",
+        "core/accounts/emailverification.html",
         {"pin": pin, "receiver": email},
     )
     text_content = strip_tags(html_content)
@@ -59,7 +57,7 @@ def password_reset_otp(email, otp_length):
     sender = SENDER
     receiver = [email]
     html_content = render_to_string(
-        "core/reset_password.html",
+        "core/accounts/reset_password.html",
         {"pin": pin, "receiver": receiver},
     )
     text_content = strip_tags(html_content)
@@ -91,7 +89,7 @@ def verification_confirmation_email(email):
     receiver = [email]
 
     html_content = render_to_string(
-        "core/verification_confirmation.html",
+        "core/accounts/email_confirmation.html",
         {"receiver": receiver},
     )
     text_content = strip_tags(html_content)

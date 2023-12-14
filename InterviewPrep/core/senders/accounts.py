@@ -1,10 +1,9 @@
 from core.models.accounts import UserAccount
 from core.serializers.accounts import UserAccountSerializer
-from django.contrib.auth import get_user_model
 
 
 import pytz
-from datetime import datetime, timedelta
+
 
 UTC = pytz.UTC
 
