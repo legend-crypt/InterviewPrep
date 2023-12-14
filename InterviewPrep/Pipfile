@@ -4,9 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-bleach = "*"
+django = "*"
 djangorestframework-simplejwt = "*"
-djangorestframework = "*"
+bleach = "*"
 
 [dev-packages]
 

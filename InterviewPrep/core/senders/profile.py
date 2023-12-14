@@ -1,5 +1,5 @@
-from core.models.Profile import *
-from core.serializers.ProfileSerialiazer import *
+from core.models.profile import *
+from core.serializers.profile import *
 
 def create_profile(data):
     """Create profile"""
@@ -25,4 +25,4 @@ def get_profile_information(profile):
     if serializer.is_valid:
         return serializer.data
     else:
-        return serializer.error
+        return serializer.errors

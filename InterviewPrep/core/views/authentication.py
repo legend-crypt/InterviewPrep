@@ -4,7 +4,6 @@ import threading
 from datetime import datetime, timedelta
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import AuthenticationFailed
-from django.contrib.auth.hashers import check_password
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 from rest_framework import viewsets, generics, status
@@ -14,7 +13,6 @@ from core.utils.general import *
 from core.utils.emails import *
 import base64
 from django.http import HttpRequest
-from django.contrib.auth import get_user_model
 import pytz
 UTC = pytz.UTC
 

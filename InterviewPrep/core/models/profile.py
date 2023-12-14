@@ -3,11 +3,11 @@ import uuid
 
 
 
-GENDER = ([
-    "male", "male",
-    "female", "female",
-    "prefer_not_to_say", "prefer not to say"
-])
+GENDER = [
+    ("male", "male"),
+    ("female", "female"),
+    ("prefer_not_to_say", "prefer not to say")
+]
 class Profile(models.Model):
     profile_id = models.UUIDField(primary_key=True, editable=False, unique=True, default=uuid.uuid4)
     first_name = models.CharField(max_length=50)

@@ -1,4 +1,4 @@
-from core.models import VerificationToken, PasswordVerificationToken
+from core.models.verification_token import VerificationToken, PasswordVerificationToken
 from core.retrievers.accounts import *
 
 

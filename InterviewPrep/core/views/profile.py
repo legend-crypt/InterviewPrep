@@ -1,15 +1,20 @@
-from restframework import viewsets, status
+from rest_framework import viewsets, status
 from core.models.profile import Profile
-from restframework.response import Response
-from restframework.permissions import IsAuthentication
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from core.senders.profile import *
 from core.retrievers.profile import *
-from core.utils import *
+from core.utils.general import *
 
 
 
 class ProfileViewset(viewsets.ViewSet):
-    
+    permission_classes = [IsAuthenticated]
+
+    def list(self,request):
+        context = get_profiles()
+        return Response(context,status=status.HTTP_200_OK)
+
     def retrieve(self, request, id)->Response:
         """Retrieve Profile
 
@@ -20,7 +25,6 @@ class ProfileViewset(viewsets.ViewSet):
         Returns:
             Response: http response
         """
-        permission_classes = [isAuthenticated]
         profile = get_profile_by_id(id)
         if not profile:
             context = {
@@ -43,7 +47,6 @@ class ProfileViewset(viewsets.ViewSet):
         Returns:
             http Response: http response
         """
-        permission_classes = [IsAuthenticated]
         user = get_user_from_jwttoken(request)
         if user.profile:
             context = {
@@ -71,7 +74,6 @@ class ProfileViewset(viewsets.ViewSet):
         Returns:
             Response: http response
         """
-        permission_classes = [IsAuthenticated]
         user = get_user_from_jwttoken(request)
         if not user.profile:
             context = {

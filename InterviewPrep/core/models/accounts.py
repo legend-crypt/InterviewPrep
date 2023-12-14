@@ -1,25 +1,22 @@
 from django.db import models
 import uuid
-from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-# from phone_field import PhoneField
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 # Create your models here.
 
 class UserAccountBase(BaseUserManager):
-    def create_user(self, email, password=None):
+    def create_user(self, email, password=None, **kwargs):
         if not email:
             raise ValueError("Users must have an email address")
-        user = self.model(email=self.normalize_email(email))
+        user = self.model(email=self.normalize_email(email),**kwargs)
         user.set_password(password)
         user.save(using=self.db)
         return user
     
-    def create_superuser(self, email, password=None, **extra_fields):
+    def create_superuser(self, email, password=None, **kwargs):
         if not email:
             raise ValueError('Email is required')
-        user = self.model(
-            email = self.normalize_email(email),
-        )
-        user = self.create_user(email, password, **extra_fields)
+       
+        user = self.create_user(email, password, **kwargs)
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)   
@@ -34,9 +31,11 @@ class UserAccount(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     
+    objects = UserAccountBase()
+
+
     USERNAME_FIELD = 'email'
     
-    objects = UserAccountBase()
     
     def __str__(self):
         return self.email

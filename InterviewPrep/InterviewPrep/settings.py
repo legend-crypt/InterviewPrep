@@ -32,16 +32,23 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'core',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
     'rest_framework',
     'rest_framework_simplejwt',
+    "rest_framework_simplejwt.token_blacklist",
+
 ]
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
@@ -61,7 +68,6 @@ SIMPLE_JWT = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'rest_framework_simplejwt.authentication.JWTAuthentication'
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -91,6 +97,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'InterviewPrep.wsgi.application'
 
 
+AUTH_USER_MODEL = "core.UserAccount"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -120,7 +127,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'core.UserAccount'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
